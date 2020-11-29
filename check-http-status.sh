@@ -6,7 +6,7 @@
 # This script uses curl and HTTP status codes to check if web pages are accessible.
 #
 # If all URLs return a successful HTTP status code, this script returns an exit status of zero.
-# If any URL fails for any reason, this script exits with non-zero status.
+# If any URL fails for any reason, this script returns a non-zero exit status.
 #
 ###############################################################################################
 
