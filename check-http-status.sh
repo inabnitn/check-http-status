@@ -45,9 +45,7 @@ color_off=$(tput sgr0)
 function get_http_status_code {
    # First check if curl can even reach the destination. There could be situations
    # where curl doesn't receive any HTTP status code, such as with bad URLs.
-   curl --max-time "$timeout" --output /dev/null --silent "$1"
-   
-   if [[ $? -ne 0 ]] ; then
+   if ! curl --max-time "$timeout" --output /dev/null --silent "$1" ; then
       echo "${red}FAILED - *** - ${color_off}no HTTP status code received, because curl could not reach $1"
       touch "$failed_flag"
       continue
@@ -71,7 +69,7 @@ function get_http_status_code {
 }
 
 # Read in the list of URLs from the input file.
-while read url ; do
+while read -r url ; do
    # Call each instance of 'get_http_status_code' as a separate background process,
    # so that essentially all URLs are checked in parallel, rather than one at a time.
    # This works well unless you are checking hundreds of URLs at once. In that case,
