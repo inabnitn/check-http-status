@@ -49,7 +49,7 @@ function get_http_status_code {
    
    if [[ $? -ne 0 ]] ; then
       echo "${red}FAILED - *** - ${color_off}no HTTP status code received, because curl could not reach $1"
-      failed=1
+      touch "$failed_flag"
       continue
    fi
    
@@ -63,7 +63,7 @@ function get_http_status_code {
    # More info at https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
    if [[ "$http_status" == [45][0-9][0-9] ]] ; then
       echo "${red}FAILED - ${http_status} - ${color_off}$1"
-      failed=1
+      touch "$failed_flag"
    else
       # Add extra white space so that all results (failed and succeeded) line up nicely.
       echo "    ${green}OK - ${http_status} - ${color_off}$1"
