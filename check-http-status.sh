@@ -14,7 +14,6 @@
 timeout=5
 
 # The file containing the list of URLs to check.
-#input_file=list-of-urls
 input_file=list-of-urls
 
 # Make sure we have read access to the input file.
